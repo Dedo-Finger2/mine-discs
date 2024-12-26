@@ -43,6 +43,13 @@ const discs = [
     imagePath: "./src/database/disc-images/creator.png",
     trackPath: "./src/database/disc-tracks/creator.mp3",
   }),
+  new Disc({
+    name: "pigstep",
+    compositor: "Lena Raine",
+    accentColor: "#000",
+    imagePath: "./src/database/disc-images/pigstep.png",
+    trackPath: "./src/database/disc-tracks/pigstep.mp3",
+  }),
 ];
 
 export default discs;
