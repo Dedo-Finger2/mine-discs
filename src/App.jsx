@@ -1,8 +1,11 @@
+import DiscInfo from "./components/DiscInfo";
+import discs from "./database";
+
 function App() {
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div>
+      <DiscInfo disc={discs[0]} />
+    </div>
   );
 }
 

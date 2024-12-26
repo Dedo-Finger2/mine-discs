@@ -38,9 +38,9 @@ class Disc {
 const discs = [
   new Disc({
     name: "creator",
-    compositor: "???",
+    compositor: "Lena Raine",
     accentColor: "#000",
-    imagePath: "",
+    imagePath: "./src/database/disc-images/creator.png",
     trackPath: "./src/database/disc-tracks/creator.mp3",
   }),
 ];
