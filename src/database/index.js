@@ -1,23 +1,48 @@
-import path from "node:path";
+class Disc {
+  /** @type { string } */
+  name;
+  /** @type { string } */
+  compositor;
+  /** @type { string } */
+  accentColor;
+  /** @type { string } */
+  trackPath;
+  /** @type { HTMLAudioElement } */
+  #audioElement;
+  /** @type { string } */
+  imagePath;
 
-/**
- * @typedef { Object } Disc
- * @property { string } name
- * @property { string } compositor
- * @property { string } accentColor
- * @property { string } trackPath
- * @property { string } imagePath
- */
+  /**
+   * @param {{ name: string, compositor: string, accentColor: string, trackPath: string, imagePath: string }} disc
+   */
+  constructor(disc) {
+    this.name = disc.name;
+    this.compositor = disc.compositor;
+    this.accentColor = disc.accentColor;
+    this.trackPath = disc.trackPath;
+    this.#createAudioElement();
+    this.imagePath = disc.imagePath;
+  }
+
+  #createAudioElement() {
+    this.#audioElement = new Audio(this.trackPath);
+    this.#audioElement.volume = 0.5; // 50%
+  }
+
+  get audio() {
+    return this.#audioElement;
+  }
+}
 
 /** @type {Array<Disc>} */
 const discs = [
-  {
+  new Disc({
     name: "creator",
     compositor: "???",
     accentColor: "#000",
-    imagePath: path.join("./", "database", "disc-images", "creator.png"),
-    trackPath: path.join("./", "database", "disc-tracks", "creator.mp3"),
-  },
+    imagePath: "",
+    trackPath: "./src/database/disc-tracks/creator.mp3",
+  }),
 ];
 
 export default discs;
