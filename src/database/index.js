@@ -94,7 +94,7 @@ const discs = [
   }),
   new Disc({
     name: "Creator (Music Box)",
-    compositor: "C418",
+    compositor: "Lena Raine ",
     accentColor: "#000",
     imagePath: "./src/database/disc-images/creator-music-box.png",
     trackPath: "./src/database/disc-tracks/creator-music-box.mp3",
@@ -122,14 +122,14 @@ const discs = [
   }),
   new Disc({
     name: "Otherside",
-    compositor: "C418",
+    compositor: "Lena Raine",
     accentColor: "#000",
     imagePath: "./src/database/disc-images/otherside.png",
     trackPath: "./src/database/disc-tracks/otherside.mp3",
   }),
   new Disc({
     name: "Precipice",
-    compositor: "C418",
+    compositor: "Aaron Cherof ",
     accentColor: "#000",
     imagePath: "./src/database/disc-images/precipice.png",
     trackPath: "./src/database/disc-tracks/precipice.mp3",
@@ -161,6 +161,13 @@ const discs = [
     accentColor: "#000",
     imagePath: "./src/database/disc-images/ward.png",
     trackPath: "./src/database/disc-tracks/ward.mp3",
+  }),
+  new Disc({
+    name: "Relic",
+    compositor: "Aaron Cherof ",
+    accentColor: "#000",
+    imagePath: "./src/database/disc-images/relic.png",
+    trackPath: "./src/database/disc-tracks/relic.mp3",
   }),
 ];
 
