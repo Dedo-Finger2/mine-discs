@@ -43,6 +43,7 @@ function MusicPlayer({
   useEffect(() => {
     if (currentAudioDuration === audioDuration) {
       setIsPlaying(false);
+      setCurrentAudioDuration(0);
       if (isAutoPlaying) {
         setCurrentTrackIndex((prev) => prev + 1);
         // FIX: AUTO PLAY NÃO ESTÁ FUNCIONANDO
@@ -100,8 +101,21 @@ function MusicPlayer({
     setIsAutoPlaying((prev) => !prev);
   }
 
+  function handleTimeRangeInputChange(e) {
+    const value = e.target.value;
+    const audio = audioElement.current;
+    setCurrentAudioDuration(value);
+    audio.currentTime = value;
+  }
+
   return (
     <div>
+      <input
+        onChange={handleTimeRangeInputChange}
+        value={currentAudioDuration}
+        max={audioDuration}
+        type="range"
+      />
       <span>{formatTime(currentAudioDuration)}</span>
       {" - "}
       <span>{formatTime(audioDuration)}</span>
