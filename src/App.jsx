@@ -7,7 +7,11 @@ function App() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   return (
-    <div>
+    <div
+      style={{
+        background: discs[currentTrackIndex].accentColor,
+      }}
+    >
       <DiscInfo disc={discs[currentTrackIndex]} />
       <MusicPlayer
         audioSrc={discs[currentTrackIndex].trackPath}
