@@ -10,8 +10,9 @@ function App() {
     <div>
       <DiscInfo disc={discs[currentTrackIndex]} />
       <MusicPlayer
-        audioElement={discs[currentTrackIndex].audio}
+        audioSrc={discs[currentTrackIndex].trackPath}
         setCurrentTrackIndex={setCurrentTrackIndex}
+        totalTracks={discs.length}
       />
     </div>
   );

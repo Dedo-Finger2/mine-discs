@@ -1,48 +1,78 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import discs from "../database";
+import { useState, useRef, useEffect } from "react";
 
 MusicPlayer.propTypes = {
-  audioElement: PropTypes.object.isRequired,
+  audioSrc: PropTypes.string.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
+  totalTracks: PropTypes.number.isRequired,
 };
 
-function MusicPlayer({ audioElement, setCurrentTrackIndex }) {
+function MusicPlayer({ audioSrc, setCurrentTrackIndex, totalTracks }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
 
-  const maximumCurrentTrackIndex = discs.length;
+  const audioElement = useRef(new Audio(audioSrc));
 
-  function handleNextTrack() {
+  useEffect(() => {
+    const updateCurrentTime = () =>
+      setCurrentAudioDuration(audioElement.current.currentTime);
+    const updateDuration = () =>
+      setAudioDuration(audioElement.current.duration);
+
+    const audio = audioElement.current;
+    audio.src = audioSrc; // atualiza o src do elemento de áudio quando reccarregar
+    audio.load(); // recarrega o audio
+    audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("timeupdate", updateCurrentTime);
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("timeupdate", updateCurrentTime);
+    };
+  }, [audioSrc]);
+
+  const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
-      if (prev + 1 >= maximumCurrentTrackIndex) return prev;
-      audioElement.load();
+      if (prev + 1 >= totalTracks) return prev;
       setIsPlaying(false);
+      setCurrentAudioDuration(0);
       return prev + 1;
     });
-  }
+  };
 
-  function handlePreviousTrack() {
+  const handlePreviousTrack = () => {
     setCurrentTrackIndex((prev) => {
-      if (prev - 1 <= -1) return prev;
-      audioElement.load();
+      if (prev - 1 < 0) return prev;
       setIsPlaying(false);
+      setCurrentAudioDuration(0);
       return prev - 1;
     });
-  }
+  };
 
-  function togglePlayPause() {
+  const togglePlayPause = () => {
+    const audio = audioElement.current;
     if (isPlaying) {
+      audio.pause();
       setIsPlaying(false);
-      audioElement.pause();
     } else {
+      audio.play();
       setIsPlaying(true);
-      audioElement.play();
     }
-  }
+  };
+
+  const formatTime = (seconds) => {
+    const formattedSeconds = Math.ceil(seconds);
+    const m = Math.floor(formattedSeconds / 60);
+    const s = formattedSeconds % 60;
+    return `${m}:${s > 9 ? s : "0" + s}`;
+  };
 
   return (
     <div>
-      {/*  TODO: Fazer mostrar o tempo da música enquanto ela toca       */}
+      <span>{formatTime(currentAudioDuration)}</span>
+      {" - "}
+      <span>{formatTime(audioDuration)}</span>
       <button onClick={handlePreviousTrack}>Previous</button>
       <button onClick={togglePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
       <button onClick={handleNextTrack}>Next</button>
