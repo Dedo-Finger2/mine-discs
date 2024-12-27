@@ -9,7 +9,7 @@ function App() {
   return (
     <div
       style={{
-        background: discs[currentTrackIndex].accentColor,
+        background: discs[currentTrackIndex].gradientColor,
       }}
     >
       <DiscInfo disc={discs[currentTrackIndex]} />
