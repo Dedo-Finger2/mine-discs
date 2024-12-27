@@ -32,6 +32,12 @@ function MusicPlayer({ audioSrc, setCurrentTrackIndex, totalTracks }) {
     };
   }, [audioSrc]);
 
+  useEffect(() => {
+    if (currentAudioDuration === audioDuration) {
+      setIsPlaying(false);
+    }
+  }, [currentAudioDuration, audioDuration]);
+
   const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
       if (prev + 1 >= totalTracks) return prev;
