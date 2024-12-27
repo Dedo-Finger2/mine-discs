@@ -18,6 +18,7 @@ function MusicPlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 
   const audioElement = useRef(new Audio(audioSrc));
 
@@ -42,8 +43,22 @@ function MusicPlayer({
   useEffect(() => {
     if (currentAudioDuration === audioDuration) {
       setIsPlaying(false);
+      if (isAutoPlaying) {
+        setCurrentTrackIndex((prev) => prev + 1);
+        // FIX: AUTO PLAY NÃO ESTÁ FUNCIONANDO
+        const audio = audioElement.current;
+        setAudioDuration(0);
+        setIsPlaying(true);
+        audio.play();
+      }
     }
-  }, [currentAudioDuration, audioDuration]);
+  }, [
+    currentAudioDuration,
+    audioDuration,
+    audioElement,
+    isAutoPlaying,
+    setCurrentTrackIndex,
+  ]);
 
   const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
@@ -81,6 +96,10 @@ function MusicPlayer({
     return `${m}:${s > 9 ? s : "0" + s}`;
   };
 
+  function handleAutoPlay() {
+    setIsAutoPlaying((prev) => !prev);
+  }
+
   return (
     <div>
       <span>{formatTime(currentAudioDuration)}</span>
@@ -89,6 +108,10 @@ function MusicPlayer({
       <button onClick={handlePreviousTrack}>Previous</button>
       <button onClick={togglePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
       <button onClick={handleNextTrack}>Next</button>
+      <button onClick={handleAutoPlay}>
+        Autoplay: {isAutoPlaying ? "On" : "Off"}
+      </button>
+      <button>No Loop</button>
       <DiscList
         currentDiscIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
