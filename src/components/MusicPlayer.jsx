@@ -1,13 +1,20 @@
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
+import DiscList from "./DiscListDrawer";
 
 MusicPlayer.propTypes = {
   audioSrc: PropTypes.string.isRequired,
+  currentTrackIndex: PropTypes.number.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
   totalTracks: PropTypes.number.isRequired,
 };
 
-function MusicPlayer({ audioSrc, setCurrentTrackIndex, totalTracks }) {
+function MusicPlayer({
+  audioSrc,
+  setCurrentTrackIndex,
+  currentTrackIndex,
+  totalTracks,
+}) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
@@ -82,6 +89,12 @@ function MusicPlayer({ audioSrc, setCurrentTrackIndex, totalTracks }) {
       <button onClick={handlePreviousTrack}>Previous</button>
       <button onClick={togglePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
       <button onClick={handleNextTrack}>Next</button>
+      <DiscList
+        currentDiscIndex={currentTrackIndex}
+        setCurrentTrackIndex={setCurrentTrackIndex}
+        setIsPlaying={setIsPlaying}
+        setCurrentAudioDuration={setCurrentAudioDuration}
+      />
     </div>
   );
 }

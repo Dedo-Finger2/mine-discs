@@ -11,6 +11,7 @@ function App() {
       <DiscInfo disc={discs[currentTrackIndex]} />
       <MusicPlayer
         audioSrc={discs[currentTrackIndex].trackPath}
+        currentTrackIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
         totalTracks={discs.length}
       />
