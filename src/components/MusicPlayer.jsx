@@ -47,7 +47,7 @@ function MusicPlayer({
     async function handleHasEnded() {
       setIsPlaying(false);
       setCurrentAudioDuration(0);
-      if (isAutoPlaying && !isLooping) {
+      if (isAutoPlaying && !isLooping && currentTrackIndex < totalTracks - 1) {
         setCurrentTrackIndex((prev) => prev + 1);
         setIsPlaying(true);
         try {
