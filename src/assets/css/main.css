@@ -8,3 +8,118 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#disc-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#disc-info-container > img{
+  width: 400px;
+  margin-left: 1.5rem;
+}
+
+#disc-name-and-compositor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FAFAFA;
+  gap: 1rem;
+}
+#disc-name-and-compositor > span:nth-child(1) {
+  font-size: 3rem;
+  font-weight: bold;
+}
+#disc-name-and-compositor > span:nth-child(2) {
+  font-size: 1.3rem;
+  color: whitesmoke;
+}
+
+/* Music Player */
+#music-player-song-progress-bar-and-time {
+  display: flex;
+  flex-direction: column;
+}
+
+#music-player-music-time {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: whitesmoke;
+  font-size: .9rem;
+}
+
+#music-player-control-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+#music-player-time-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+#music-player-time-buttons > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  border: white 2px solid;
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  font-weight: bold;
+  transition: background-color .4s ease-in-out;
+}
+#music-player-time-buttons > button:hover {
+  cursor: pointer;
+  background-color: rgba(200, 200, 200, 0.5);
+}
+#music-player-time-buttons > button:nth-child(1) {
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+#music-player-time-buttons > button:nth-child(3) {
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+}
+
+#music-player-flux-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+#music-player-flux-buttons > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .2rem;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: whitesmoke;
+  padding: .5rem;
+  font-size: .87rem;
+  transition: border .2s ease-in-out;
+  transition: background-color .2s ease-in-out;
+}
+#music-player-flux-buttons > button:hover {
+  cursor: pointer;
+  border: 1px white solid;
+  border-radius: 5px;
+  background-color: rgba(200, 200, 200, 0.5);
+}

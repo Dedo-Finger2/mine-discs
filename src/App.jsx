@@ -20,7 +20,7 @@ function App() {
   }, [currentTrackIndex]);
 
   return (
-    <div>
+    <div id="app">
       <div
         style={{
           position: "fixed",

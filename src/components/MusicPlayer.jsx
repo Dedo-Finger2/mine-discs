@@ -1,6 +1,16 @@
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
 import DiscList from "./DiscListDrawer";
+import {
+  StepBack,
+  StepForward,
+  Pause,
+  Play,
+  Repeat,
+  Repeat1,
+  PlayCircle,
+  Repeat2,
+} from "lucide-react";
 
 MusicPlayer.propTypes = {
   audioSrc: PropTypes.string.isRequired,
@@ -187,28 +197,46 @@ function MusicPlayer({
 
   return (
     <div>
-      <input
-        onChange={handleTimeRangeInputChange}
-        value={currentAudioDuration}
-        max={audioDuration}
-        type="range"
-      />
-      <span>{formatTime(currentAudioDuration)}</span>
-      {" - "}
-      <span>{formatTime(audioDuration)}</span>
-      <button onClick={handlePreviousTrack}>Previous</button>
-      <button onClick={togglePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
-      <button onClick={handleNextTrack}>Next</button>
-      <button onClick={handleAutoPlay}>
-        Autoplay: {isAutoPlaying ? "On" : "Off"}
-      </button>
-      <button onClick={handleChangingLoopType}>
-        {loopType === "track"
-          ? "Looping Track"
-          : loopType === "playlist"
-          ? "Looping Playlist"
-          : "No Loop"}
-      </button>
+      <div id="music-player-song-progress-bar-and-time">
+        <input
+          onChange={handleTimeRangeInputChange}
+          value={currentAudioDuration}
+          max={audioDuration}
+          type="range"
+        />
+        <div id="music-player-music-time">
+          <span>{formatTime(currentAudioDuration)}</span>
+          <span>{formatTime(audioDuration)}</span>
+        </div>
+      </div>
+      <div id="music-player-control-buttons">
+        <div id="music-player-time-buttons">
+          <button onClick={handlePreviousTrack}>
+            <StepBack />
+          </button>
+          <button onClick={togglePlayPause}>
+            {isPlaying ? <Pause /> : <Play />}
+          </button>
+          <button onClick={handleNextTrack}>
+            <StepForward />
+          </button>
+        </div>
+        <div id="music-player-flux-buttons">
+          <button onClick={handleAutoPlay}>
+            <PlayCircle />
+            Autoplay: {isAutoPlaying ? "On" : "Off"}
+          </button>
+          <button onClick={handleChangingLoopType}>
+            {loopType === "track" ? (
+              <Repeat1 />
+            ) : loopType === "playlist" ? (
+              <Repeat />
+            ) : (
+              <Repeat2 />
+            )}
+          </button>
+        </div>
+      </div>
       <DiscList
         currentDiscIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}

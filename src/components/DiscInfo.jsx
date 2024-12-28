@@ -10,9 +10,9 @@ DiscInfo.propTypes = {
 
 function DiscInfo({ disc }) {
   return (
-    <div>
-      <div>
-        <h1>{disc.name}</h1>
+    <div id="disc-info-container">
+      <div id="disc-name-and-compositor">
+        <span>{disc.name}</span>
         <span>{disc.compositor}</span>
       </div>
       <img src={disc.imagePath} alt="disc-image" />
