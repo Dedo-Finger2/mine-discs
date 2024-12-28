@@ -19,6 +19,8 @@ function MusicPlayer({
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [isLooping, setIsLooping] = useState(false);
+  const [loopType, setLoopType] = useState("");
 
   const audioElement = useRef(new Audio(audioSrc));
 
@@ -60,6 +62,19 @@ function MusicPlayer({
       audio.removeEventListener("ended", handleHasEnded);
     };
   }, [currentAudioDuration, setIsPlaying, isAutoPlaying, setCurrentTrackIndex]);
+
+  function handleChangingLoopType() {
+    if (loopType === "") {
+      setLoopType("track");
+      setIsLooping(true);
+    } else if (loopType === "track") {
+      setLoopType("playlist");
+      setIsLooping(true);
+    } else {
+      setLoopType("");
+      setIsLooping(false);
+    }
+  }
 
   const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
@@ -135,7 +150,13 @@ function MusicPlayer({
       <button onClick={handleAutoPlay}>
         Autoplay: {isAutoPlaying ? "On" : "Off"}
       </button>
-      <button>No Loop</button>
+      <button onClick={handleChangingLoopType}>
+        {loopType === "track"
+          ? "Looping Track"
+          : loopType === "playlist"
+          ? "Looping Playlist"
+          : "No Loop"}
+      </button>
       <DiscList
         currentDiscIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
