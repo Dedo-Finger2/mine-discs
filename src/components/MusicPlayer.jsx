@@ -64,6 +64,33 @@ function MusicPlayer({
           console.error("ERROR trying to re-play the current track: ", error);
         }
       }
+      if (
+        isLooping &&
+        loopType === "playlist" &&
+        currentTrackIndex < totalTracks - 1
+      ) {
+        try {
+          setCurrentTrackIndex((prev) => prev + 1);
+          audio.autoplay = true;
+          setIsPlaying(true);
+          await audio.play();
+        } catch (error) {
+          console.error("ERROR trying to play next track: ", error);
+        }
+      }
+      if (
+        isLooping &&
+        loopType === "playlist" &&
+        currentTrackIndex === totalTracks - 1
+      ) {
+        try {
+          setCurrentTrackIndex(0);
+          audio.autoplay = true;
+          setIsPlaying(true);
+        } catch (error) {
+          console.error("ERROR trying to re-play the playlist: ", error);
+        }
+      }
     }
     audio.addEventListener("ended", handleHasEnded);
     return () => {
@@ -74,6 +101,8 @@ function MusicPlayer({
     setIsPlaying,
     isLooping,
     loopType,
+    currentTrackIndex,
+    totalTracks,
     isAutoPlaying,
     setCurrentTrackIndex,
   ]);
