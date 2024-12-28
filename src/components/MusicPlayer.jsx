@@ -65,11 +65,17 @@ function MusicPlayer({
 
   function handleChangingLoopType() {
     if (loopType === "") {
+      const audio = audioElement.current;
       setLoopType("track");
       setIsLooping(true);
+      audio.autoplay = false;
+      setIsAutoPlaying(false);
     } else if (loopType === "track") {
+      const audio = audioElement.current;
       setLoopType("playlist");
       setIsLooping(true);
+      audio.autoplay = false;
+      setIsAutoPlaying(false);
     } else {
       setLoopType("");
       setIsLooping(false);
@@ -121,6 +127,8 @@ function MusicPlayer({
       }
       const audio = audioElement.current;
       audio.autoplay = true;
+      setLoopType("");
+      setIsLooping(false);
       if (!isPlaying) audio.pause();
       return true;
     });
