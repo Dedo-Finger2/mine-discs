@@ -41,25 +41,25 @@ function MusicPlayer({
   }, [audioSrc]);
 
   useEffect(() => {
-    if (currentAudioDuration === audioDuration) {
+    const audio = audioElement.current;
+    async function handleHasEnded() {
       setIsPlaying(false);
       setCurrentAudioDuration(0);
       if (isAutoPlaying) {
         setCurrentTrackIndex((prev) => prev + 1);
-        // FIX: AUTO PLAY NÃO ESTÁ FUNCIONANDO
-        const audio = audioElement.current;
-        setAudioDuration(0);
         setIsPlaying(true);
-        audio.play();
+        try {
+          await audio.play();
+        } catch (error) {
+          console.error("ERROR trying to play audio: ", error);
+        }
       }
     }
-  }, [
-    currentAudioDuration,
-    audioDuration,
-    audioElement,
-    isAutoPlaying,
-    setCurrentTrackIndex,
-  ]);
+    audio.addEventListener("ended", handleHasEnded);
+    return () => {
+      audio.removeEventListener("ended", handleHasEnded);
+    };
+  }, [currentAudioDuration, setIsPlaying, isAutoPlaying, setCurrentTrackIndex]);
 
   const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
@@ -98,7 +98,17 @@ function MusicPlayer({
   };
 
   function handleAutoPlay() {
-    setIsAutoPlaying((prev) => !prev);
+    setIsAutoPlaying((prev) => {
+      if (prev) {
+        const audio = audioElement.current;
+        audio.autoplay = false;
+        return false;
+      }
+      const audio = audioElement.current;
+      audio.autoplay = true;
+      audio.pause();
+      return true;
+    });
   }
 
   function handleTimeRangeInputChange(e) {
