@@ -106,7 +106,7 @@ function MusicPlayer({
       }
       const audio = audioElement.current;
       audio.autoplay = true;
-      audio.pause();
+      if (!isPlaying) audio.pause();
       return true;
     });
   }
