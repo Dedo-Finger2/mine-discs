@@ -47,7 +47,7 @@ function MusicPlayer({
     async function handleHasEnded() {
       setIsPlaying(false);
       setCurrentAudioDuration(0);
-      if (isAutoPlaying) {
+      if (isAutoPlaying && !isLooping) {
         setCurrentTrackIndex((prev) => prev + 1);
         setIsPlaying(true);
         try {
@@ -56,12 +56,27 @@ function MusicPlayer({
           console.error("ERROR trying to play audio: ", error);
         }
       }
+      if (isLooping && loopType === "track") {
+        try {
+          setIsPlaying(true);
+          await audio.play();
+        } catch (error) {
+          console.error("ERROR trying to re-play the current track: ", error);
+        }
+      }
     }
     audio.addEventListener("ended", handleHasEnded);
     return () => {
       audio.removeEventListener("ended", handleHasEnded);
     };
-  }, [currentAudioDuration, setIsPlaying, isAutoPlaying, setCurrentTrackIndex]);
+  }, [
+    currentAudioDuration,
+    setIsPlaying,
+    isLooping,
+    loopType,
+    isAutoPlaying,
+    setCurrentTrackIndex,
+  ]);
 
   function handleChangingLoopType() {
     if (loopType === "") {
