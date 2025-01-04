@@ -33,6 +33,7 @@ function MusicPlayer({
   const [loopType, setLoopType] = useState("");
 
   const audioElement = useRef(new Audio(audioSrc));
+  const buttonPressSound = new Audio("./src/assets/sounds/button-press.mp3");
 
   useEffect(() => {
     const updateCurrentTime = () =>
@@ -117,7 +118,8 @@ function MusicPlayer({
     setCurrentTrackIndex,
   ]);
 
-  function handleChangingLoopType() {
+  async function handleChangingLoopType() {
+    await buttonPressSound.play();
     if (loopType === "") {
       const audio = audioElement.current;
       setLoopType("track");
@@ -136,7 +138,8 @@ function MusicPlayer({
     }
   }
 
-  const handleNextTrack = () => {
+  const handleNextTrack = async () => {
+    await buttonPressSound.play();
     setCurrentTrackIndex((prev) => {
       if (prev + 1 >= totalTracks) return prev;
       if (isAutoPlaying || (isLooping && loopType === "playlist"))
@@ -147,7 +150,8 @@ function MusicPlayer({
     });
   };
 
-  const handlePreviousTrack = () => {
+  const handlePreviousTrack = async () => {
+    await buttonPressSound.play();
     setCurrentTrackIndex((prev) => {
       if (prev - 1 < 0) return prev;
       if (isAutoPlaying || (isLooping && loopType === "playlist"))
@@ -158,8 +162,9 @@ function MusicPlayer({
     });
   };
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     const audio = audioElement.current;
+    await buttonPressSound.play();
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
@@ -176,7 +181,8 @@ function MusicPlayer({
     return `${m}:${s > 9 ? s : "0" + s}`;
   };
 
-  function handleAutoPlay() {
+  async function handleAutoPlay() {
+    await buttonPressSound.play();
     setIsAutoPlaying((prev) => {
       if (prev) {
         const audio = audioElement.current;
