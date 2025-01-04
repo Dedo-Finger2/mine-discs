@@ -8,7 +8,7 @@ function App() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
 
   useEffect(() => {
-    document.body.style.background = discs[currentTrackIndex].gradientColor;
+    document.body.style.backgroundImage = `url(${discs[currentTrackIndex].backgroundImagePath})`;
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundPosition = "center";
@@ -30,7 +30,7 @@ function App() {
           height: "100%",
           zIndex: -1,
           background:
-            "radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%)",
+            "radial-gradient(circle, rgba(0, 0, 0, 0) 5%, rgba(0, 0, 0, 0.86) 90%)",
           pointerEvents: "none", // Para garantir que não interfira nos cliques
         }}
       />
