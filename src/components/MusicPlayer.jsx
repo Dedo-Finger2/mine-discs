@@ -139,7 +139,9 @@ function MusicPlayer({
   const handleNextTrack = () => {
     setCurrentTrackIndex((prev) => {
       if (prev + 1 >= totalTracks) return prev;
-      setIsPlaying(false);
+      if (isAutoPlaying || (isLooping && loopType === "playlist"))
+        setIsPlaying(true);
+      else setIsPlaying(false);
       setCurrentAudioDuration(0);
       return prev + 1;
     });
@@ -148,7 +150,9 @@ function MusicPlayer({
   const handlePreviousTrack = () => {
     setCurrentTrackIndex((prev) => {
       if (prev - 1 < 0) return prev;
-      setIsPlaying(false);
+      if (isAutoPlaying || (isLooping && loopType === "playlist"))
+        setIsPlaying(true);
+      else setIsPlaying(false);
       setCurrentAudioDuration(0);
       return prev - 1;
     });
@@ -228,11 +232,41 @@ function MusicPlayer({
           </button>
           <button onClick={handleChangingLoopType}>
             {loopType === "track" ? (
-              <Repeat1 />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                }}
+              >
+                <Repeat1 />
+                <span>Track</span>
+              </div>
             ) : loopType === "playlist" ? (
-              <Repeat />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                }}
+              >
+                <Repeat />
+                <span>Playlist</span>
+              </div>
             ) : (
-              <Repeat2 />
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                }}
+              >
+                <Repeat2 />
+                <span>No loop</span>
+              </div>
             )}
           </button>
         </div>
