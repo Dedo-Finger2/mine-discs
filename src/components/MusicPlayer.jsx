@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import { useState, useRef, useEffect } from "react";
-import DiscList from "./DiscListDrawer";
 import {
   StepBack,
   StepForward,
@@ -17,6 +16,10 @@ MusicPlayer.propTypes = {
   currentTrackIndex: PropTypes.number.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
   totalTracks: PropTypes.number.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  setIsPlaying: PropTypes.func.isRequired,
+  currentAudioDuration: PropTypes.number.isRequired,
+  setCurrentAudioDuration: PropTypes.func.isRequired,
 };
 
 function MusicPlayer({
@@ -24,9 +27,11 @@ function MusicPlayer({
   setCurrentTrackIndex,
   currentTrackIndex,
   totalTracks,
+  isPlaying,
+  setIsPlaying,
+  currentAudioDuration,
+  setCurrentAudioDuration,
 }) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
   const [audioDuration, setAudioDuration] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
@@ -51,7 +56,7 @@ function MusicPlayer({
       audio.removeEventListener("loadedmetadata", updateDuration);
       audio.removeEventListener("timeupdate", updateCurrentTime);
     };
-  }, [audioSrc]);
+  }, [audioSrc, setCurrentAudioDuration]);
 
   useEffect(() => {
     const audio = audioElement.current;
@@ -116,6 +121,7 @@ function MusicPlayer({
     totalTracks,
     isAutoPlaying,
     setCurrentTrackIndex,
+    setCurrentAudioDuration,
   ]);
 
   async function handleChangingLoopType() {
@@ -277,12 +283,6 @@ function MusicPlayer({
           </button>
         </div>
       </div>
-      <DiscList
-        currentDiscIndex={currentTrackIndex}
-        setCurrentTrackIndex={setCurrentTrackIndex}
-        setIsPlaying={setIsPlaying}
-        setCurrentAudioDuration={setCurrentAudioDuration}
-      />
     </div>
   );
 }

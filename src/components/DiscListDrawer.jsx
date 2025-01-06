@@ -1,5 +1,7 @@
+import { useState } from "react";
 import discs from "./../database/index.js";
 import PropTypes from "prop-types";
+import MusicDiskSlot from "./MusicDiscSlot.jsx";
 
 DiscList.propTypes = {
   currentDiscIndex: PropTypes.number.isRequired,
@@ -14,6 +16,12 @@ function DiscList({
   setIsPlaying,
   setCurrentAudioDuration,
 }) {
+  const [isChestOpen, setIsChestOpen] = useState(false);
+
+  function handleOpenChest() {
+    setIsChestOpen((prev) => !prev);
+  }
+
   function handleOnChanceTrack(e) {
     const value = e.target.value;
     setCurrentTrackIndex(Number(value));
@@ -22,14 +30,42 @@ function DiscList({
   }
 
   return (
-    <div>
-      <select value={currentDiscIndex} onChange={handleOnChanceTrack}>
+    <div
+      style={{
+        position: "absolute",
+        top: 0,
+        right: 0,
+      }}
+    >
+      <img
+        onClick={handleOpenChest}
+        id="chest-button"
+        src={
+          isChestOpen
+            ? "./src/assets/open-chest.png"
+            : "./src/assets/closed-chest.png"
+        }
+        alt=""
+      />
+      <div className={isChestOpen ? "open" : ""} id="disc-list-drawer">
+        {discs.map((disc, index) => (
+          <MusicDiskSlot
+            disc={disc}
+            currentDiscIndex={currentDiscIndex}
+            setCurrentAudioDuration={setCurrentAudioDuration}
+            setCurrentTrackIndex={setCurrentTrackIndex}
+            setIsPlaying={setIsPlaying}
+            key={index}
+          />
+        ))}
+      </div>
+      {/* <select value={currentDiscIndex} onChange={handleOnChanceTrack}>
         {discs.map((disc, index) => (
           <option value={index} key={index}>
             {disc.name}
           </option>
         ))}
-      </select>
+      </select> */}
     </div>
   );
 }

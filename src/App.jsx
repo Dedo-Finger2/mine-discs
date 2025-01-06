@@ -1,11 +1,14 @@
 import { useState } from "react";
 import DiscInfo from "./components/DiscInfo";
 import MusicPlayer from "./components/MusicPlayer";
+import DiscList from "./components/DiscListDrawer";
 import discs from "./database";
 import { useEffect } from "react";
 
 function App() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
 
   useEffect(() => {
     document.body.style.backgroundImage = `url(${discs[currentTrackIndex].backgroundImagePath})`;
@@ -40,6 +43,16 @@ function App() {
         currentTrackIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
         totalTracks={discs.length}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        currentAudioDuration={currentAudioDuration}
+        setCurrentAudioDuration={setCurrentAudioDuration}
+      />
+      <DiscList
+        currentDiscIndex={currentTrackIndex}
+        setCurrentTrackIndex={setCurrentTrackIndex}
+        setIsPlaying={setIsPlaying}
+        setCurrentAudioDuration={setCurrentAudioDuration}
       />
     </div>
   );

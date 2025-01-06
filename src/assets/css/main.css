@@ -142,3 +142,44 @@ body {
   outline: 2px white solid;
   background-image: url("./src/assets/mine-button-background-hover.png");
 }
+
+/* Disc Drawler */
+#chest-button {
+  position: fixed;
+  z-index: 1;
+  right: 2rem;
+  top: 1rem;
+  width: 70px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+#disc-list-drawer {
+  /* position: absolute; */
+  background-color: #c2c2c2;
+  width: 500px;
+  height: 100vh;
+  transform: translateX(100%);
+  display: none;
+
+  &.open {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    transform: translateX(0%);
+  }
+}
+
+.disc-slot {
+  display: flex;
+  background-color: #8b8b8b;
+  width: fit-content;
+  outline: #c2c2c2 .3rem solid;
+  flex-direction: column;
+  align-items: center;
+
+  & img {
+    width: 50px;
+  }
+}
