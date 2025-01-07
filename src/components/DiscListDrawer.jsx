@@ -40,6 +40,7 @@ function DiscList({
       }}
     >
       <img
+        loading="lazy"
         onClick={handleOpenChest}
         id="chest-button"
         src={

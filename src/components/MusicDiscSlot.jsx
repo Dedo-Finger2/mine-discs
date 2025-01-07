@@ -35,7 +35,7 @@ function MusicDiskSlot({
       className={`disc-slot ${isActive ? "active-disc-slot" : ""}`}
     >
       <div className="disc-slot-overlay"></div>
-      <img src={disc.imagePath} alt="disc-image" />
+      <img loading="lazy" src={disc.imagePath} alt="disc-image" />
     </div>
   );
 }
