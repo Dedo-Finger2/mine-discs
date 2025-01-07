@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import DiscList from "./DiscListDrawer";
 
 MusicDiskSlot.propTypes = {
   disc: PropTypes.object.isRequired,
@@ -19,7 +18,6 @@ function MusicDiskSlot({
   return (
     <div className="disc-slot">
       <img src={disc.imagePath} alt="disc-image" />
-      <span>{DiscList.name}</span>
     </div>
   );
 }

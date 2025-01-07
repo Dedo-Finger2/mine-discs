@@ -157,29 +157,53 @@ body {
 }
 
 #disc-list-drawer {
-  /* position: absolute; */
   background-color: #c2c2c2;
-  width: 500px;
-  height: 100vh;
+  width: 600px;
+  height: fit-content;
+  padding: 12px;
   transform: translateX(100%);
   display: none;
+  margin-right: 12px;
+  border-top: #ffffff solid 3px;
+  border-left: #ffffff solid 3px;
+  border-bottom: #555555 solid 3px;
+  border-right: #555555 solid 3px;
 
   &.open {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-top: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 4px;
     transform: translateX(0%);
   }
 }
 
 .disc-slot {
   display: flex;
+
   background-color: #8b8b8b;
   width: fit-content;
-  outline: #c2c2c2 .3rem solid;
+  border-bottom: #ffffff solid 2px;
+  border-right: #ffffff solid 2px;
+  border-top: #555555 solid 2px;
+  border-left: #555555 solid 2px;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: fit-content;
+  padding: 12px;
 
   & img {
     width: 50px;
   }
+  
+  &:hover {
+    background-color: #c5c5c5;
+  }
+}
+
+#disc-list-drawer, .disc-slot {
+  box-sizing: border-box;
 }
