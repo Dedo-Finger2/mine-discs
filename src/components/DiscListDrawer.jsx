@@ -19,6 +19,13 @@ function DiscList({
   const [isChestOpen, setIsChestOpen] = useState(false);
 
   function handleOpenChest() {
+    let audio = new Audio();
+    if (isChestOpen) {
+      audio.src = "./src/assets/sounds/close-chest.mp3";
+    } else {
+      audio.src = "./src/assets/sounds/open-chest.mp3";
+    }
+    audio.play();
     setIsChestOpen((prev) => !prev);
   }
 
