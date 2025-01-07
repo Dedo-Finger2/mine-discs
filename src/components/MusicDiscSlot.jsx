@@ -17,6 +17,7 @@ function MusicDiskSlot({
 }) {
   return (
     <div className="disc-slot">
+      <div className="disc-slot-overlay"></div>
       <img src={disc.imagePath} alt="disc-image" />
     </div>
   );

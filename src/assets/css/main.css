@@ -182,7 +182,7 @@ body {
 
 .disc-slot {
   display: flex;
-
+  position: relative;
   background-color: #8b8b8b;
   width: fit-content;
   border-bottom: #ffffff solid 2px;
@@ -198,9 +198,29 @@ body {
   & img {
     width: 50px;
   }
-  
-  &:hover {
+
+  & .disc-slot-overlay {
+    display: none;
+  }
+
+  & .active-disc-slot {
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+    width: 50px;
+    height: 50px;
     background-color: #c5c5c5;
+    z-index: 2;
+  }
+  
+  &:hover .disc-slot-overlay {
+    display: block;
+    position: absolute;
+    opacity: 0.5;
+    width: 50px;
+    height: 50px;
+    background-color: #c5c5c5;
+    z-index: 2;
   }
 }
 
