@@ -58,6 +58,7 @@ function DiscList({
         {discs.map((disc, index) => (
           <MusicDiskSlot
             disc={disc}
+            isActive={index === currentDiscIndex}
             currentDiscIndex={currentDiscIndex}
             setCurrentAudioDuration={setCurrentAudioDuration}
             setCurrentTrackIndex={setCurrentTrackIndex}
