@@ -44,7 +44,7 @@ function MusicPlayer({
   const [isLooping, setIsLooping] = useState(false);
 
   const audioElement = useRef(new Audio(audioSrc));
-  const buttonPressSound = new Audio("./src/assets/sounds/button-press.mp3");
+  const buttonPressSound = new Audio("/assets/sounds/button-press.mp3");
 
   useEffect(() => {
     const updateCurrentTime = () =>

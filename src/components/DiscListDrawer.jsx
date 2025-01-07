@@ -23,9 +23,9 @@ function DiscList({
   function handleOpenChest() {
     let audio = new Audio();
     if (isChestOpen) {
-      audio.src = "./src/assets/sounds/close-chest.mp3";
+      audio.src = "/assets/sounds/close-chest.mp3";
     } else {
-      audio.src = "./src/assets/sounds/open-chest.mp3";
+      audio.src = "/assets/sounds/open-chest.mp3";
     }
     audio.play();
     setIsChestOpen((prev) => !prev);
@@ -44,8 +44,8 @@ function DiscList({
         id="chest-button"
         src={
           isChestOpen
-            ? "./src/assets/open-chest.png"
-            : "./src/assets/closed-chest.png"
+            ? "/assets/images/open-chest.png"
+            : "/assets/images/closed-chest.png"
         }
         alt=""
       />

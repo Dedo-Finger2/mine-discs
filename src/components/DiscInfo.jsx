@@ -12,7 +12,7 @@ function DiscInfo({ disc }) {
   return (
     <div id="disc-info-container">
       <div id="disc-name-and-compositor-container">
-        <img src="./src/assets/jukebox.png" alt="book-icon" />
+        <img src="/assets/images/jukebox.png" alt="book-icon" />
         <div id="disc-name-and-compositor-only">
           <span>{disc.name}</span>
           <span>{disc.compositor}</span>
