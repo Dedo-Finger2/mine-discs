@@ -12,6 +12,10 @@ import {
 } from "lucide-react";
 
 MusicPlayer.propTypes = {
+  loopType: PropTypes.string.isRequired,
+  setLoopType: PropTypes.func.isRequired,
+  isAutoPlaying: PropTypes.bool.isRequired,
+  setIsAutoPlaying: PropTypes.func.isRequired,
   audioSrc: PropTypes.string.isRequired,
   currentTrackIndex: PropTypes.number.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
@@ -24,6 +28,10 @@ MusicPlayer.propTypes = {
 
 function MusicPlayer({
   audioSrc,
+  loopType,
+  setLoopType,
+  isAutoPlaying,
+  setIsAutoPlaying,
   setCurrentTrackIndex,
   currentTrackIndex,
   totalTracks,
@@ -33,9 +41,7 @@ function MusicPlayer({
   setCurrentAudioDuration,
 }) {
   const [audioDuration, setAudioDuration] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [isLooping, setIsLooping] = useState(false);
-  const [loopType, setLoopType] = useState("");
 
   const audioElement = useRef(new Audio(audioSrc));
   const buttonPressSound = new Audio("./src/assets/sounds/button-press.mp3");

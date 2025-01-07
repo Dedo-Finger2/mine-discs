@@ -1,24 +1,39 @@
 import PropTypes from "prop-types";
 
 MusicDiskSlot.propTypes = {
+  isAutoPlaying: PropTypes.bool.isRequired,
   disc: PropTypes.object.isRequired,
   isActive: PropTypes.bool.isRequired,
-  currentDiscIndex: PropTypes.number.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
   setIsPlaying: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
   setCurrentAudioDuration: PropTypes.func.isRequired,
 };
 
 function MusicDiskSlot({
   disc,
+  isAutoPlaying,
   isActive,
-  currentDiscIndex,
+  index,
   setCurrentTrackIndex,
   setIsPlaying,
   setCurrentAudioDuration,
 }) {
+  function handleChangeTrack() {
+    if (!isAutoPlaying) {
+      setIsPlaying(false);
+    } else {
+      setIsPlaying(true);
+    }
+    setCurrentTrackIndex(index);
+    setCurrentAudioDuration(0);
+  }
+
   return (
-    <div className={`disc-slot ${isActive ? "active-disc-slot" : ""}`}>
+    <div
+      onClick={handleChangeTrack}
+      className={`disc-slot ${isActive ? "active-disc-slot" : ""}`}
+    >
       <div className="disc-slot-overlay"></div>
       <img src={disc.imagePath} alt="disc-image" />
     </div>

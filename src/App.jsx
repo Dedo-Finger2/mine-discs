@@ -8,6 +8,8 @@ import { useEffect } from "react";
 function App() {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [loopType, setLoopType] = useState("");
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
 
   useEffect(() => {
@@ -39,6 +41,10 @@ function App() {
       />
       <DiscInfo disc={discs[currentTrackIndex]} />
       <MusicPlayer
+        isAutoPlaying={isAutoPlaying}
+        setIsAutoPlaying={setIsAutoPlaying}
+        loopType={loopType}
+        setLoopType={setLoopType}
         audioSrc={discs[currentTrackIndex].trackPath}
         currentTrackIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
@@ -49,6 +55,7 @@ function App() {
         setCurrentAudioDuration={setCurrentAudioDuration}
       />
       <DiscList
+        isAutoPlaying={isAutoPlaying}
         currentDiscIndex={currentTrackIndex}
         setCurrentTrackIndex={setCurrentTrackIndex}
         setIsPlaying={setIsPlaying}

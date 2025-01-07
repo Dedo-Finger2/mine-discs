@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import MusicDiskSlot from "./MusicDiscSlot.jsx";
 
 DiscList.propTypes = {
+  isAutoPlaying: PropTypes.bool.isRequired,
   currentDiscIndex: PropTypes.number.isRequired,
   setCurrentTrackIndex: PropTypes.func.isRequired,
   setIsPlaying: PropTypes.func.isRequired,
@@ -11,6 +12,7 @@ DiscList.propTypes = {
 };
 
 function DiscList({
+  isAutoPlaying,
   currentDiscIndex,
   setCurrentTrackIndex,
   setIsPlaying,
@@ -27,13 +29,6 @@ function DiscList({
     }
     audio.play();
     setIsChestOpen((prev) => !prev);
-  }
-
-  function handleOnChanceTrack(e) {
-    const value = e.target.value;
-    setCurrentTrackIndex(Number(value));
-    setIsPlaying(false);
-    setCurrentAudioDuration(0);
   }
 
   return (
@@ -57,9 +52,10 @@ function DiscList({
       <div className={isChestOpen ? "open" : ""} id="disc-list-drawer">
         {discs.map((disc, index) => (
           <MusicDiskSlot
+            isAutoPlaying={isAutoPlaying}
             disc={disc}
+            index={index}
             isActive={index === currentDiscIndex}
-            currentDiscIndex={currentDiscIndex}
             setCurrentAudioDuration={setCurrentAudioDuration}
             setCurrentTrackIndex={setCurrentTrackIndex}
             setIsPlaying={setIsPlaying}
